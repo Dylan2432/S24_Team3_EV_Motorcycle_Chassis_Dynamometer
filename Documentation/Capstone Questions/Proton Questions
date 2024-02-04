@@ -1,1 +1,18 @@
 Add Name and Date to each Question/Answer once Confirmed.
+
+Ethan Griffith - 10:51 A.M. 2/4/2024
+{
+What all functions of the bike needs to be tested?
+
+What are the desired accuracy and precision requirements for the measurements?
+
+How do you want the results of the testing to be displayed? (example: phone app, plc screen, graphs/report)
+
+Do the tests need to be done under any sort of environmental conditions? (rain, wind, extreme temperatures, etc.)
+
+Are there any sensors already integrated into the bike that collect data?
+
+How frequently would you like to meet to touch base on the project?
+
+Is there any sort of data security or confidentiality that we need to adhere to with the testing?
+}
