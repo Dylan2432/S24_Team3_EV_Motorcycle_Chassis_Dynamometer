@@ -1,3 +1,1 @@
-Functionality
 
-The primary function of the data acquisition (DAQ) is capturing and displaying relevant testing data in real-time. The DAQ resolves this constraint through a process containing signal conditioners, signal converters, a controller, and software. Through the execution of correctly applying these systems, accurate, real-time data will be derived to support the generation of a model.
