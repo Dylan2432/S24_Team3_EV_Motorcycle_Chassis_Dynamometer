@@ -35,7 +35,10 @@ The design of this subsystem presents an Elegoo ATMega 2560 R3 board and Arduino
 
 Along with hardware, this board works with Arduino software with many libraries making it easy to work with sensors, motors, and the user interface. This is also where the raw sensor data will be converted into readable, relevant metrics before being sent off to the user interface.
 
-This allows the team to address constraint 3, enabling the sensors to bring in relevant metrics. This Arduino controller must be utilized correctly for the team to meet all safety and workplace standards. This applies directly to constraint 5. 
+This allows the team to address constraint 3, enabling the sensors to bring in relevant metrics. This Arduino controller must be utilized correctly for the team to meet all safety and workplace standards. This applies directly to constraint 5.
+
+To prove that the ATMega 2560 Board can successfully sample accurate enough for all of the sensors, the team finds that the sensor with the fastest response time would solve this. The reason being is that the faster the response time, the more accurate the measurement is to real time. Out of all of the sensors that are being used, the team have found that the rpm sensor would be best as the it has a response time of 1ms. The sample rate of the ATMega is given as 15000 samples per second allowing the sensor output to be received in a very short amount of time.
+
 
 ## BOM
 |Item        |Quantity   |Price   |Total   |
