@@ -6,9 +6,10 @@ The purpose of the Remote Throttle Control Subsystem is to be able to adjust the
 ## Constraints
 | No. | Constraints                                                                                     | Origin           |
 |-----|-------------------------------------------------------------------------------------------------|------------------|
-| 1   | Be able to be fully operated remotely.                                                          | Safety Constraint |
+| 1   | Be able to rotate the entire range of the throttle on the bike by a signal from a controller.   | Safety Constraint |
 | 2   | Support repeatedly testing the bike from 0 km/h to 50 km/h and then back down to 0 km/h.        | Design Constraint |
 | 3   | Be able to adjust operating speeds in 1 km/h increments and measure response time.              | Design Constraint |
+| 4   | Be able to adjust the throttle from a dead stop to a full throttle in under 200ms.              | Design Constraint |
 
 1. This constraint is set into place to keep all personnel operating the equipment and testing the bike safe. By allowing it to be operated remotely, all testing can be done at a safe distance, so no one will be injured in case something were to go wrong. It also serves as a way to increase the accuracy of testing by not having to worry about the weight of someone on the bike while it is running and being able to precisely change the speed at desired increments. 
 
@@ -16,30 +17,35 @@ The purpose of the Remote Throttle Control Subsystem is to be able to adjust the
 
 3. This is an extremely important constraint that was requested by the customer because it specifies how accurate the throttle control system needs to be. This also provides evidence for why a remote throttle control system is needed because precisely incrementing the speed by 1 km/h manually with someone on the bike is difficult to achieve and can be inaccurate. This constraint affects the design of the system because in order to achieve this, a motor must be used that can be accurately controlled enough to make these small adjustments to the throttle handle.
 
+4. This constraint is to ensure that the throttle control system will be able to accelerate fast enough by making the throttle able to rotate a dead stop to full throttle faster than a person can. To determine this constraint 10 different test runs were timed to see how fast a throttle handle can be rotated, and the average of these runs was taken to determine that this can be achieved in 200ms. 
+
 ## Schematics
 
 
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/0e50a1b1-a29c-47ee-92d3-a56e51253466)
+![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/b245687a-7d07-4e1c-a5c7-4e3b2065fe54)
 
 
 ### Figure 1 – Throttle Control Assembly
 The first schematic shown in the figure is an overview of the system as a whole. It shows exactly how a clamp will be used in conjunction with a motor to control the throttle of the bike. It is important to note that without having access to the Bob bike yet or a 3D model of it, a generic throttle handle was used for the diagram. However, with the subsystem that has been designed, it will not only work with the Bob bike but will also be compatible with any other bike used.  This system can be broken down into four different parts: The clamp, motor, driver, and microcontroller. 
-The first part is the clamp. This has been custom made not only to fit the motor being used but also to be fitted to a motorcycle's throttle handle. This system will be 3D printed that to make it more cost-efficient and provide the desired results for this specific outcome. 
+The first part is the clamp. This has been custom-made not only to fit the motor being used but also to be fitted to a motorcycle's throttle handle. This system will be 3D printed to make it more cost-efficient and provide the desired results for this specific outcome. 
 
 
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/5ae2bca4-eb48-4758-979d-d04601b481cf)
+
+![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/e0006de8-2582-4889-ba4d-2b4483e9a40c)
 
 
 
 ### Figure 2 – Clamp
-The motor that will attach to this clamp is a Nema 17 motor. A full explanation as to why this specific motor was chosen can be found in the analysis section. In order to connect the microcontroller to the motor, a driver must be utilized. For this system, an A4988 driver will be used to control the motor with a 24V DC power supply to power the motor. The wiring to connect these components can be found in figure 3 below. 
+The motor that will attach to this clamp is a Nema 17 motor. A full explanation as to why this specific motor was chosen can be found in the analysis section. To connect the microcontroller to the motor, a driver must be utilized. For this system, an A4988 driver will be used to control the motor with a 24V DC power supply to power the motor. The wiring to connect these components can be found in Figure 3 below. 
 
 
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/7a8f28d8-476d-4231-9fb9-12884f6cb1a0)
+
+![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158241294/5af70f15-2cfd-4cf7-86ad-94e0288fb4ad)
+
 
 
 ### Figure 3 – Full Wiring Diagram
-In the middle of the diagram, you can see that the A4988 driver is connected to the motor through 4 pins on the right of it, and the motor is powered by the 24V DC power supply connected to the two pins in the top right corner. A Decoupling capacitor will be added to protect the chip and motor from any voltage spikes. The bottom right corner is connected to the Arduino and this supply’s power to the logic pins. The two pins in the bottom left corner are what control the motor, and these will connect to the output pins on the Arduino. The two pins above that that are connected are the sleep and reset pins and need to be connected for the driver to run. Finally, the top left corner will have MS1 set to high to convert the motor from 200 steps/rev to 400 steps/rev, the reasoning behind this will be explained further in the analysis.
+In the middle of the diagram, you can see that the A4988 driver is connected to the motor through 4 pins on the right of it and the motor is powered by the 24V DC power supply connected to the two pins in the top right corner. A Decoupling capacitor will be added to protect the chip and motor from any voltage spikes. The bottom right corner is connected to the Arduino and this supplies power to the logic pins. The two pins in the bottom left corner are what control the motor, and these will connect to the output pins on the Arduino. The two pins above that are connected are the sleep and reset pins which need to be connected for the driver to run. Finally, the top left corner will have MS1 set to high to convert the motor from 200 steps/rev to 400 steps/rev, the reasoning behind this will be explained further in the analysis.
 
 ## Analysis
 The goal of this subsystem is to create a way to remotely control the throttle of an EV bike while it is running on a dyno. The solution that has been created will accomplish this using four main components: microcontroller, driver, motor, and clamp. With these components, the throttle can be controlled by the user simply with just programming in the microcontroller. This will comply with all the constraints given and accomplish the results desired by the customer. First, a full explanation of each component and how it will all work together must be given.
@@ -50,20 +56,21 @@ The driver is the middleman between the microcontroller and the motor. It takes 
 
 The A4988 driver has an extremely useful feature that will be utilized in this project and that is microstepping. This will allow the motor to have finer movement control compared to the base setting. By setting the MS1 to high it will put the driver in half-step mode which essentially doubles the number of steps a motor can take in a full revolution. This will be useful in this project because most throttle handles only rotate around 90 degrees so in the base setting for the motor of 200 steps/rev, or 1.8 degrees/step, only gives you 50 steps to control the throttle with. Considering the bike can reach top speeds of over 80 km/h and the throttle needs to be controlled in 1 km/h increments, according to constraint 3, more steps will be needed to precisely control the throttle. Putting the throttle in half-step mode changes the steps/rev to 400 and will allow the throttle to be controlled at the desired level of precision.  
 
-The motor is going to be the muscle behind turning the throttle handle. It gets the instructions from the microcontroller and driver does exactly what they instruct it to do. The most important aspect of the motor is making sure that it is light and can be easily mounted, but also can be controlled with enough precision to make small adjustments in the throttle and strong enough to rotate it. The Nema 17 stepper motor being used weighs less than a pound so mounting weight won’t be an issue and it works perfectly with both the driver and microcontroller. Luckily since throttles need to be easily turned by humans using just their wrist, the motor does not need to be able to supply that much force. The only issue with the motor is getting the throttle handle to rotate as the motor spindle rotates.
+The motor is going to be the muscle behind turning the throttle handle. It gets the instructions from the microcontroller and the driver does exactly what they instruct it to do. The most important aspect of the motor is making sure that it is light and can be easily mounted. However, other factors must also be considered like being controlled with enough precision to make small adjustments in the throttle, strong enough to rotate it, and fast enough to meet the constraints. The Nema 17 stepper motor being used weighs less than a pound so mounting weight won’t be an issue and it works perfectly with both the driver and microcontroller. Luckily since throttles need to be easily turned by humans using just their wrists, the motor does not need to be able to supply that much force. Nema 17 motors also have an extremely high RPM even from a dead stop. To determine how fast the motor can reach the 90-degree mark from a dead stop, tests were run timing the motor to determine the exact time. After running numerous tests filming the motor in 960fps next to a timer it was determined that it can reach the 90-degree mark in 70ms which is over 4 times as fast as the duration in the constraint. The only issue with the motor is getting the throttle handle to rotate as the motor spindle rotates.
 
-This is where the clamp comes in. The clamp needs to be able to attach the motor to the throttle so that as the motor turns the throttle handle will also turn. It was determined that the most efficient way to do this is by 3D printing a custom clamp. That way it is both affordable and works perfectly for the application it is being used for. The design that was made in figure 2 is similar to a double C-clamp. The reason for this is so that the motor spindle can be perfectly in line with the throttle handle and the degrees of rotation won’t be thrown off once it is tightened down. It is made so that it be easily connected and removed simply by just unscrewing it. Also, the ends of each screw are curved so that it will conform to the throttle handle and add more friction to keep it from sliding. These ends will also be screwed on so that the screws can be removed from the clamp if needed and fine adjustments can be made so that curved ends won’t get in the way of tightening the clamp down. A safety measure that will be implemented is adding silicon tape to the throttle to protect the handle from any possible damage from the clamp and add extra friction to ensure the clamp doesn’t slide at all when being rotated. 
+This is where the clamp comes in. The clamp needs to be able to attach the motor to the throttle so that as the motor turns the throttle handle will also turn. It was determined that the most efficient way to do this is by 3D printing a custom clamp. That way it is both affordable and works perfectly for the application it is being used for. The design that was made in Figure 2 is similar to a double C-clamp. The reason for this is so that the motor spindle can be perfectly in line with the throttle handle and the degrees of rotation won’t be thrown off once it is tightened down. It is made so that it be easily connected and removed simply by just unscrewing it. Also, the ends of each screw are in a V-shape so that it will conform to the throttle handle by creating two points of contact on each end. There will be added foam pads on each of the clamps to create more friction between the clamp and the handle and keep it from sliding. These ends will also be screwed on so that the screws can be removed from the clamp if needed and fine adjustments can be made so that curved ends won’t get in the way of tightening the clamp down. A safety measure that will be implemented is adding silicon tape to the throttle to protect the handle from any possible damage from the clamp and adding extra friction to ensure the clamp doesn’t slide at all when being rotated. 
 
 With this setup, the throttle handle of the bike can now be completely remotely controlled by the user. The only other part is programming inside the microcontroller to adjust the speed of the bike as needed. This will depend on several factors on the bike including the max degrees of rotation on the throttle handle, the change in RPM per degree of rotation, and the max RPM of the bike, so it will need to be tested once the bike can be set up. This will also be in conjunction with the user interface subsystem to connect what the user inputs and output instructions to the motor. The last part is mounting the motor to the end of the throttle handle but since this mount will likely attach to whatever dyno the Mechanical Engineering team decides to use it will have to be chosen based on their selection. 
 
 ## BOM (Bill of Materials)
 | Item                                                          | Item #     | Quantity | Price | Total  |
 |---------------------------------------------------------------|------------|----------|-------|--------|
-| Stepper Motor Nema 17 Bipolar 40mm 64oz.in(45Ncm) 2A 4 Lead  | 17HS16-2004S | 1        | $12.99| $12.99 |
+| Stepper Motor Nema 17 Bipolar 40mm 64oz.in(45Ncm) 2A 4 Lead   | 17HS16-2004S | 1        | $12.99| $12.99 |
 | A4988 Stepper Motor Drive with Heat Sink for Arduino          | MG046      | 1        | $6.99 | $6.99  |
 | EMITEVER 24V DC Power Supply, 96W, 120V AC to 24V DC Converter 4amp | EM-DC-96W | 1        | $29.99| $29.99 |
 | 2 Rolls 1IN X 10FT Grip Tape, Rubber Tape, Silicone Tape, Grip Tape for Handles | MB-YCJ-0131 | 1 | $11.99 | $11.99 |
-| **Subsystem Total**                                            |            |          |       | $61.96 |
+| Foam Tape Strong Pad Mounting, Black Self-Adhesive Tape	       | AV001	    |       1  | $5.99 |	$5.99 |
+| **Subsystem Total**                                            |            |          |       | $67.95 |
 
 ## References
 - HowToMechatronics. (08/2023). Arduino Stepper Motors - The Ultimate Guide. Retrieved from [https://howtomechatronics.com/tutorials/arduino/stepper-motors-and-arduino-the-ultimate-guide/](https://howtomechatronics.com/tutorials/arduino/stepper-motors-and-arduino-the-ultimate-guide/) [Accessed on 3/30/2024]
