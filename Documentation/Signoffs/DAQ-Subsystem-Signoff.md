@@ -11,7 +11,7 @@ The primary function of the data acquisition (DAQ) is capturing and displaying r
 |5|Comply with all relevant codes and standards listed in II. Ethical, Professional, and Standard Considerations.       |Ethics Constraint|
 |16|Analog input pins must be able to read a 0-5 V or 4-20 mA output from the sensors.       |Derived from further considerations|
 |17|The sensors must send at most 4800 samples per second.       |Derived from further considerations|
-|16|The microcontroller must be able to read the RPM sensor in increments of 1 RPM, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in increments of 0.1 N-m.       |Derived from further considerations|
+|18|The microcontroller must be able to read the RPM sensor in increments of 1 RPM, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in increments of 0.1 N-m.       |Derived from further considerations|
 
 
 3.)  In order for successful system operation to be achieved, it is important that derived information is logged accurately. To do so, data needs to be properly displayed through the process of relaying sensor outputs to the correct pins on the Arduino Mega 2560 board. Once connecting all sensors, verification of generated data must be carried out. To verify this information, comparison between sensor values and the bike’s internal DAQ’s metrics will be conducted. Upon verification, the DAQ can successfully deliver output signals to the user interface to be displayed.
@@ -43,7 +43,7 @@ The team will be implementing a GPIO terminal block breakout board module to kee
 
 ## Analysis
 
-Arduino:
+### Arduino:
 
 The design of this subsystem presents an Elegoo ATMega 2560 R3 board and Arduino software to be the brain to effectively power sensors, capture sensor outputs, calibrate raw sensor data, perform necessary conversions/calculations, and send data to the user interface system for display/logging. The 2560 has 16 analog input pins, 54 digital I/O pins, 15 PWM output pins, and 3 5 V pins. The analog pins allow for interfacing with analog sensors capturing test data (shown in schematic.) The PWM and digital I/O pins allow for the addition of digital sensors or motors from other subsystems. The 2560 also provides 5 V and 3.3 V power necessary for sensors to operate. However, the board with multiple sensors attached will draw more power than a USB connection can supply, so the team proposes to obtain an external power supply that will offer extra 5 V and 3.3 V pins. The board itself will be powered by a 7-12 V wall outlet adapter. It communicates via a USB cord with a laptop/PC where it will send data to the user-interface system; this indicates it is necessary to purchase the correct cord long enough to work in any environment.
 
@@ -51,7 +51,7 @@ Along with hardware, this board works with Arduino software with many libraries 
 
 This allows the team to address constraint 3, enabling the sensors to bring in relevant metrics. This Arduino controller must be utilized correctly for the team to meet all safety and workplace standards. This applies directly to constraint 5.
 
-Resolution and Sample Rate:
+### Resolution and Sample Rate:
 
 To prove that the ATMega 2560 Board can successfully sample accurately enough for all of the sensors, the team finds values to determine if this specific microcontroller is fast enough to determine real-time values.  Finding the maximum values of sample rate and I/O pin currents, as well as the resolution, can show how accurate and precise the sensors are measuring.
 
@@ -79,7 +79,7 @@ Use the following equation to determine the precision that the ATMega provides a
 
   These values are more precise than other dynos on the market, which provides confidence in the ability of the ATMega 2560 to work as a DAQ.
 
-Range:
+### Range:
 
   The ATMega brings in 0-5 volts (5.5-volt max) through the analog input ports, which meets the constraint for sensor inputs. It cannot use 4-20 mA as input, however, with an external 4-20 mA to 0-5 V converter circuit, the ATMega could be compatible with 4-20 mA sensors. This is ideal due to the less noise these signals produce compared to 0-5 V. This implementation, if necessary, will be discussed in the sensor implementation subsystem along with other discussions of signal noise. 
 
@@ -91,7 +91,7 @@ Range:
 |ELEGOO ATMega 2560 Board|1          |\$ 29.99 |$ 29.99|
 |Terminal Block Board Module |1| $ 25.90| $ 25.90|
 |ATMega External Power Supply |1 |$ 12.99|$ 12.99
-Subsystem Total |||$ 84.87|
+Subsystem Total |||$ 68.88|
 
 ## References
 
