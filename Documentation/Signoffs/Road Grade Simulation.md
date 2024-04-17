@@ -37,5 +37,3 @@ Approach for Vehicle Mass and Road Grade," in IEEE Access, vol. 8,
 pp. 218853-218862, 2020, doi: 10.1109/ACCESS.2020.3042656.
 
 Dayton 48ZJ90 Documentation: https://xchanger.com/wp-content/uploads/2015/05/Dayton_48ZJ90_Documentation.pdf
-
-[2] C. Somers, C. Moussa and K. Al-Haddad, "Emergency DC injection braking system," 2015 IEEE International Conference on Industrial Technology (ICIT), Seville, Spain, 2015, pp. 726-730, doi: 10.1109/ICIT.2015.7125184.
