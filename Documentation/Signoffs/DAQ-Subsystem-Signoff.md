@@ -7,22 +7,26 @@ The primary function of the data acquisition (DAQ) is capturing and displaying r
 ## Constraints
 |No.        |Constraints   |Origin   |
 |---|---------------------|--------|
-|3|Capture current and voltage supplied to the drive motor along with vehicle speed, torque, horsepower, and RPM and display all results.         |Design Constraint |
+|3|Capture all speed, torque, horsepower, and rpm values from sensor integration system, and display all results.         |Design Constraint |
 |5|Comply with all relevant codes and standards listed in II. Ethical, Professional, and Standard Considerations.       |Ethics Constraint|
 |16|Analog input pins must be able to read a 0-5 V or 4-20 mA output from the sensors.       |Derived from further considerations|
-|17|The sensors must send at most 4800 samples per second.       |Derived from further considerations|
-|18|The microcontroller must be able to read the RPM sensor in increments of 1 RPM, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in increments of 0.1 N-m.       |Derived from further considerations|
+|17|The microcontroller must have an analog-to-digital converter with a minimum of 10-bit resolution.       |Derived from further considerations|
+|18|The sensors must send at most 4800 samples per second.       |Derived from further considerations|
+|19|The microcontroller must be able to read the RPM sensor in increments of 1 RPM, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in increments of 0.1 N-m.       |Derived from further considerations|
 
 
 3.)  In order for successful system operation to be achieved, it is important that derived information is logged accurately. To do so, data needs to be properly displayed through the process of relaying sensor outputs to the correct pins on the Arduino Mega 2560 board. Once connecting all sensors, verification of generated data must be carried out. To verify this information, comparison between sensor values and the bike’s internal DAQ’s metrics will be conducted. Upon verification, the DAQ can successfully deliver output signals to the user interface to be displayed.
 
-5.)   It is required that all operations that occur shall follow the codes in II. Ethical, Professional, and Standard Considerations. This will ensure that everything being designed and tested is done in a proper and safe manner.
+5.)   To guarantee that the project is being completed in a safe and proper manner, it is important to abide by certain standards.  One specific standard to follow is IEEE standard for Sensor Performance Parameter Definitions, also known as IEEE 2700-2017, which establishes a common framework for the required terminology, units, conditions, and limits for the specific sensor performance.  Another standard that is worth mentioning is the IEC 61508-1, as this is the overall functional safety standard for industrial applications and controllers.
+
 
 16.)   An industry standard for sending a signal from a sensor to a data acquisition system or controller is a 4-20 mA current loop or 0-5 V voltage.  Because of this, the microcontroller selected must be able to handle either 4-20 mA or 0-5 V on an I/O pin.
 
-17.)   For 10 bits of resolution, the ADC clock frequency must be between 50-200kHz to make the measurements as accurate as possible.  With this information, along with the 16MHz clock frequency, the 13 ADC clock cycles, and the calculations described below, we find that the sample rate must be no higher than the 4800S/s.
+17:  It is important to have a microcontroller with an analog-to-digital converter of at least 10 bits.  The reason for this is to ensure better accuracy and higher precision.  This is further described below in the Analysis section with mathematical proof.
 
-18.)   The values must be displayed with these increments to ensure that the values that are displayed are accurate enough.  These values are determined by the calculations for each of the sensors, along with the values that are given by the microcontroller.
+18.)   For 10 bits of resolution, the ADC clock frequency must be between 50-200kHz to make the measurements as accurate as possible.  With this information, along with the 16MHz clock frequency, the 13 ADC clock cycles, and the calculations described below, we find that the sample rate must be no higher than the 4800S/s.
+
+19.)   The values must be displayed with these increments to ensure that the values that are displayed are accurate enough.  These values are determined by the calculations for each of the sensors, along with the values that are given by the microcontroller.
 
 
 
@@ -117,4 +121,9 @@ ATmega640/1280/1281/2560/2561 Datasheet (microchip.com)
 Bit resolution requirement
 https://www.dataq.com/resources/pdfs/article_pdfs/adc-resolution.pdf
 
+IEEE Standard 2700-2017:
+2700-2017 - IEEE Standard for Sensor Performance Parameter Definitions | IEEE Standard | IEEE Xplore
+
+IEC 61508-1:
+info_iec61508-1{ed2.0}b.pdf
 
