@@ -2,81 +2,75 @@
 
 ## Functionality
 
-The user interface will be the key system by which the user communicates with the test hardware/equipment. It will receive test parameter inputs from the user (bike speed ranges and road grade simulation), translate this data to the testing equipment, as well as communicate test results/metrics to the user; all this being done via PC-compatible software. Further discussion will be addressed in the following sections
+The user interface will be the key system by which the user communicates with the test hardware/equipment. It will receive test parameter inputs from the user (bike speed and road grade simulation), translate this data to the testing equipment, as well as communicate test results/metrics to the user. Further discussion will be addressed in the following sections.
 
 ## Constraints
 
-The following are constraints from the conceptual design imposed on this subsystem by different stakeholders in the project. They are explained in the section below.
+The following are constraints imposed on this subsystem by different stakeholders in the project. They are explained in the section below:
 |No.        |Constraints   |Origin   |
 |---|---------------------|--------|
-|4|    Be able to be fully operated remotely       | Design Constraint |
-|10|Display/capture values for bike speed, acceleration, and torque on a single PC        |Design Constraint|
-|15|Alert users of risk and ensure they are following correct procedures.         |Ethical Concern |
+|4|   Be able to fully operate throttle control and dyno braking from an HMI        | Design Constraint |
+|10|Display/capture values for bike speed, acceleration, and torque.       |Design Constraint|
+|15|Alert users of the potential risk of operating this chassis dyno system         |Ethical Concern |
 
-4: This constraint requests that the full testing operation of the stand be able to be completed without an individual on the bike operating it. This applies to this subsystem since the user interface controls the throttle subsystem that would otherwise be completed by direct contact with the bike.
+4: This constraint requests that the full testing operation of the stand be able to be completed without an individual physically on the bike operating it. This applies to this subsystem since the user interface controls the throttle and braking subsystems. 
 
-10: This forces the design to work specifically with PC-compatible software. It also makes the design need a way to take test data from the DAQ system, plot it, and store it for later analysis. 
+10: This forces the design to find a way to take test data from the DAQ system, visualize it, and store it for later analysis. 
 
 15: Constraint 15 addresses an ethical concern for safety, and the user interface is responsible for carrying it out due to it being the direct bridge between the dyno user and the test equipment. The solution is addressed in analysis.
 
 ## Schematics
 
-Since this subsystem consists of primarily software utilization, the schematics will not be hardware. The first schematic demonstrates how the PC containing the user interface interacts with the other subsystems. It also demonstrates what it takes in as inputs along with what it outputs and where to.
-
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/100161665/7ab706ac-cbc5-4bda-bbcd-dfdb96a64ccd)
-
-Hardware connections between PC and Throttle Control Subsystem:
-
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/100161665/d88abf95-29e3-4b61-967f-e06983edc533)
-
-Hardware connections between PC and DAQ Subsystem:
-
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/100161665/4e3b9725-b700-4411-8be2-336eed7b42cc)
+Hardware connections between HMI, PC, DAQ, throttle control, and braking:
+![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/100161665/1a1abaaf-ac70-4d22-bc95-4e3c0b0fcbfc)
 
 
-Flow chart of what user will experience before/during/after testing:
-
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/100161665/f9a29173-79e3-458f-b486-cd5b56bdfbcc)
 
 ## Analysis
 
-In order to meet the constraints listed, the user interface will need to be able to take in user inputs for bike speed ranges, road grade simulation, and braking. The interface will alert the user the   It will then need to write this data to the Throttle Control System where it will begin the bike test run. It will then need to successfully read in data points from the DAQ system (ATMega 2560)* and plot/store them along with the respective time. These needs can be met by utilizing Microsoft Excel and other PC based software. Excel is an ideal tool for meeting project constraints due to the wide range of its abilities specifically explained below. It is also a very commonly accessible tool due to it being included in a Microsoft Office license. This prevents users from buying extra hardware and/or software.
+In order to meet the constraints listed, the user interface will need to be able to take in user inputs for bike speed. It will then need to write this data to the respective subsystems through the DAQ card and begin the bike test run. Then, it will need to successfully read in data from the DAQ system and plot/store them along with the respective time. These needs can be met by utilizing National Instruments LabVIEW (graphical programming software) front and rear panels.
 
-*Note: The ATMega 2560 is included in the DAQ BOM and is not necessary for purchase for this subsystem.
+
  
 
 ### User Input
 
-Excel offers Visual Basic as an option for UI inside the application. This will be utilized to bring in the desired test parameters. Using VBE, the software will prompt the user to enter the desired maximum speed and choose incline testing (if yes, select the desired grade from 0-8%). The appropriate measures to take for incline testing will be displayed after this. Next, the testing will begin by signaling the throttle system. From this point on, the user input will allow the user to press stop at any time to signal the throttle system to stop applying the throttle. This will end the test and then ask if the user would like to test again, restarting the process. 
+For user input, LabVIEW software utilizes a front and rear panel. The front panel is the HMI layout where there will be the option to set a desired speed of 0-50 km/hr (from the customer). This front panel is what will be displayed on the touch-screen HMI. The user will be able to set up a custom duration test, or they will always have to option to change throttle/braking manually from here as well. The HMI will be connected directly via HDMI and USB to the PC running LabVIEW, where it is sending/receiving values from the DAQ. 
 
 ### Writing to Throttle Subsystem
 
-Excel Data Streamer allows for the interface between PC and microcontroller. This would allow for the throttle subsystem to operate with user-inputted values via the serial communication abilities of the ATMega 2560 (to which the throttle is connected). Arduino IDE software will be written to control the throttle using the feedback from the DAQ to bring the bike to the desired speed and keep it there (closed-loop control system). 
+Once the user chooses preferences for the test, the PC running LabVIEW writes to the DAQ. The LabVIEW VI code will be programmed to apply full-throttle (using PWM signals to the throttle system) until the bike’s speed reaches the designated speed. This speed will be maintained using closed-loop control, which is a commonly used tool in LabVIEW. Depending on the design of the braking/ torque measuring system, the VI will be programmed differently to control it. However, due to the versatility of LabVIEW, there is no issue in constraining another system to work within its uses. The schematic shows braking attached to an analog output, which is a likely possibility.
 
 ### Reading From DAQ
 	
-For a maximum user-friendly output visual, this subsystem will utilize a microcontroller-specific data logging software called “Telemetry Viewer.” It is an open-source Java-based program that can take in data via serial communication, which makes it compatible with the ATMega 2560 (the DAQ). Using Arduino IDE, the DAQ system will send the conditioned, calibrated test statistics to the serial monitor (comma-separated values (CSV) format), where Telemetry Viewer will receive the data through the specified port (COM3 for example) and build user-specified graphs to display each desired statistic vs time. Using CSV format allows for the serial communication of multiple data points at once, allowing our project to have no constraint by this. When testing is complete, the program can export the plotted data to Excel where it can be stored in the PC’s files for later analysis.
+The HMI will also be designed to plot the different metrics that are relevant to the specific test being done (HMI display will run on PC as well as HMI screen). This data will be sent from the DAQ during the test, and displayed via HDMI on the HMI. At the end of the test, (whenever the user ends the simulation on LabVIEW) the VI will write all of the time-stamped data acquired into an Excel/Matlab compatible file where it can be analyzed later. This is done simply by writing data into arrays and/or spreadsheets on the LabVIEW rear panel.  
 
 ### Safety Warning
 
-To address constraint 15, the user interface will pop up a message regarding safety as the user begins the setup/input process. They will be prompted with: “Operating a vehicle on a dyno can be dangerous and cause great harm or death if operated incorrectly. Ensure the bike is securely fastened to the dyno and no loose objects are hanging near the bike. Push accept if you have ensured the bike is safe and secure for operation." After this has been accepted, normal testing operations may continue. This addition will be included on the Excel sheet using VBE. 
+To address constraint 15, the HMI will pop up a message regarding safety as the user begins the setup/input process. They will be prompted with: “Operating a vehicle on a dyno can be dangerous and cause great harm or death if operated incorrectly. Ensure the bike is securely fastened to the dyno and no loose objects are hanging near the bike. Push accept if you have ensured the bike is safe and secure for operation." After this has been accepted, normal testing operations may continue.
 
 ### Wire Connections
 
-The connection between the UI PC and ATMega 2560 is extremely important for this entire project. There is also the situation of having an unknown testing location, so the BOM includes a 25ft USB-A to USB-B cord to ensure that no matter the testing situation there is enough cord to connect the UI PC to the ATMega.
+The connection between the UI PC, HMI, and DAQ is extremely important for this entire project. The BOM includes a 10ft HDMI cord to be versatile for connecting the PC/DAQ to the HMI, as well as a USB-A to USB-B for connecting the DAQ to the PC (running LabVIEW).
 
 ## BOM
 
 |Item        |Quantity   |Price   |Total   |
 |------------|-----------|--------|--------|
-|*Microsoft Office License|*1          |*$ 150.00 |*$ 150.00|
-|25ft USB-A to USB-B Cord |1         |$ 15.99 |$ 15.99|
-|Subsystem Total |||$ 15.99|
-
-*Only if not already available to the customer 
+|7in Touchscreen HMI|1          | $ 389.00 |$ 389.00|
+|10ft USB-A to USB-B Cord |1         |$ 9.99 |$ 9.99|
+|10ft HDMI Cord |1         |$ 14.41 |$ 14.41|
+|Subsystem Total |||$ 413.40|
 
 ## References
 
-Information regarding data Telemetry Viewer plotting/logging software (v0.7):
- http://farrellf.com/TelemetryViewer/
+HMI:
+https://www.beetronics.com/7-inch-touchscreen 
+
+USB Cord:
+https://www.amazon.com/Printer-Braided-Keyboard-Controller-Microphone/dp/B095HPPZ4G?th=1 
+
+HDMI Cord:
+https://www.amazon.com/AmazonBasics-High-Speed-HDMI-Cable-Black/dp/B08BRYJWSM/ref=sr_1_1_ffob_sspa?crid=17O6CXPI8T04C&dib=eyJ2IjoiMSJ9.zHcx_e947Lng3JebgINEV2j4qhHQpGk01xX0QKijYVrLwxlMUFxaMdWMaDUlhrjNCcZrg4Ey6EQBN8OnN5PdO8xJWUvY9oF5J9wC6N19-LZPLLhPf5S4GsfxYGcXEoatxBd3znC39Pe46iFxZhSNxRH0A7j-Z7SfgWtJF5MPll_9Y7RW988qE4WA9bPnSi5BOeu0-Xp1dWymk9Ad4vzu1G3kiOz2Cq1VvWMCHMeb1cuIOcoZYSJN-XgYvyMzR1ASnuZNP1HAI-rQwtCPRrz8Omj1Ao-VpR4FVV_TYn74p3A.1KFeajpo_080Q_qWow7bjZOx_ThPRkLuNNHU1dYDcKI&dib_tag=se&keywords=10ft%2Bhdmi%2Bcord&qid=1713936799&s=electronics&sprefix=10ft%2Bhdmi%2Bcord%2Celectronics%2C106&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1 
+
 
