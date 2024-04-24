@@ -1,10 +1,9 @@
-# {Name of the Project} - Your project should have a catchy and functional name
+# Electric Motorcycle Test Station
 
-The descriptions and information in all readme files in the starter repo (including this one) must be edited. All section descriptions must be deleted. Any failure to remove the description information (like the statement that you are currently reading) will be heavily penalized!
 
 ## Executive Summary
 
-Give the elevator pitch and abstract for the project. It should allow interested visitors to broadly understand the motivation for the project and what the project has accomplished.
+Proton Power is developing a cutting-edge battery to revolutionize electric motorcycles, addressing challenges in charging and range. Our team's project is to integrate a data acquisition system (DAQ) into a chassis dynamometer for crucial testing, ensuring accurate data collection and product validation. By selecting and integrating sensors meticulously, we aim to deliver a motorcycle test station with optimal performance while adhering to safety standards and engineering ethics.
 
 
 ## Capabilities
@@ -28,11 +27,11 @@ Below the video link show some well-taken, appropriately sized images of the pro
 
 ### Team
 
-Give a brief bio for each team member and their broad contribution to the project (no need to be terribly specifc).
+**Ethan Griffith** is a senior Electrical Engineering major at Tennessee Technological University with a minor in Mathematics. Ethan has an interest in wireless power transfer and mechatronics. For this project, Ethan focused on the design of the remote throttle control system. 
 
 ### Faculty Supervisor
 
-Tell who the faculty supervisor was for the project
+**Jesse Roberts**, M.S. is a lecturer at Tennessee Technological University. He received both his Bachelor's and Master's in Electrical Engineering at Tennessee Technological University. He is currently pursuing a Doctorate of Philosophy in Computer Science at Vanderbilt University.
 
 ### Stakeholders
 
