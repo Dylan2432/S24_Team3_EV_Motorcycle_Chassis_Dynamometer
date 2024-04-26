@@ -35,11 +35,15 @@ Below the video link show some well-taken, appropriately sized images of the pro
 
 ### Stakeholders
 
-Tell a bit about the customer for the project. Also discuss any other groups (specific or general) that are expected to be impacted by the project.
+The main stakeholder in this project is our customer Proton Power. Proton Power is a pioneering force in the realm of efficient energy, striving to overcome the global challenge of diverse charging requirements. Their cutting-edge battery technology promises faster charging and extended range, that will revolutionize the EV landscape. Proton Power is leading the design of an EV motorcycle battery with an impressive range of 400km on a single charge, offered at a fraction of the cost compared to existing models. We plan to aid them in this mission but providing data that will allow them to innovate their technology even further.
+
+Another stakeholder in the project is Bob. Bob is a leading manufacturer specializing in electric vehicles (EVs), particularly focusing on providing affordable transportation solutions for third-world countries. With a mission to address the financial burdens associated with traditional gas-driven motorcycles, Bob has shifted its focus to producing EV bikes with lower maintenance and fuel costs. With the addition of the advanced battery from Proton along with the testing done by this team, Bob can greatly improve upon this mission.
+
+
 
 ### Recognitions
 
-Use this space to recognize anyone that you feel has had an impact on the project. Be sure to recognize the work of previous teams if you referenced it for style or content. 
+We would like to thank Jesse Roberts for continually giving feedback and advice on the project and investing plenty of time and effort into the project. We would also like to thank our mechanical engineering partnering team for providing useful insight from a unique perspective and helping the team with any mechanical problems. Last but not least, we would like to thank Proton Power for giving us the opportunity to apply the knowledge learned in class to the bike they have provided us to test on.  
 
 ## Repo Organization
 
