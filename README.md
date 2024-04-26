@@ -29,6 +29,16 @@ Below the video link show some well-taken, appropriately sized images of the pro
 
 **Ethan Griffith** is a senior Electrical Engineering major at Tennessee Technological University with a minor in Mathematics. Ethan has an interest in wireless power transfer and mechatronics. For this project, Ethan focused on the design of the remote throttle control system. 
 
+**Andrew Copeland** is a senior Electrical Engineering major at Tennessee Tech. His interests include power systems, control systems, and mechatronics. Andrew's role in this project is the design and implementation of a user interface for the test system.
+
+**Aaron Littleton** 
+
+**Dylan Scruggs**
+
+**Jonathan Haas**
+
+**Branson Stephens**
+
 ### Faculty Supervisor
 
 **Jesse Roberts**, M.S. is a lecturer at Tennessee Technological University. He received both his Bachelor's and Master's in Electrical Engineering at Tennessee Technological University. He is currently pursuing a Doctorate of Philosophy in Computer Science at Vanderbilt University.
@@ -43,7 +53,7 @@ Another stakeholder in the project is Bob. Bob is a leading manufacturer special
 
 ### Recognitions
 
-We would like to thank Jesse Roberts for continually giving feedback and advice on the project and investing plenty of time and effort into the project. We would also like to thank our mechanical engineering partnering team for providing useful insight from a unique perspective and helping the team with any mechanical problems. Last but not least, we would like to thank Proton Power for giving us the opportunity to apply the knowledge learned in class to the bike they have provided us to test on.  
+We would like to thank Jesse Roberts for continually giving feedback and advice on the project and investing plenty of time and effort into the project. We would also like to thank our mechanical engineering partnering team for providing useful insight from a unique perspective and helping the team with any mechanical problems. Next, we would like to thank past Capstone teams for their advice and support. Last but not least, we would like to thank Proton Power for giving us the opportunity to apply the knowledge learned in class to the bike they have provided us to test on.  
 
 ## Repo Organization
 
@@ -56,8 +66,12 @@ In the reports section of this repository information about the individual expec
 
 ### Documentation
 
-In the documentaion section information regarding the documentation that is required and how it should be organized is given.
+The documentation folder contains:
+
+[Meeting Minutes](/Documentation/Meeting%20Minutes) : typed meeting minutes from team meetings which occured weekly at the minimum
+
+**Signoffs**: reports for each approved subsystem containing functionality, constraints, schematics, analysis, and BOM
 
 ### Software
 
-In the software directory of the repo information regarding how each team is expected to document software can be found.
+All software utilized for the project can be found in the [Software](./Software) folder.
