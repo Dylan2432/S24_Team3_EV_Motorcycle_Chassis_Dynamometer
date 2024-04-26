@@ -18,9 +18,7 @@ Projects often have some outcomes that are more interesting than others. Here, h
 
 ## Project Demonstration & Images
 
-Give a link to a video of the project being demonstrated. The video should be hosted on the capstone youtube.
-
-Below the video link show some well-taken, appropriately sized images of the project.
+Project images and videos will be added as the project progresses.
 
 
 ## About Us
@@ -57,21 +55,18 @@ We would like to thank Jesse Roberts for continually giving feedback and advice 
 
 ## Repo Organization
 
-Give the layout of the repo and what can be found where. Make it easy on those who are interested by making the headings of the various things in this section clickable links to the relevant folder or file in the repo.
-
-
-### Reports
+### [Reports](/Reports)
 
 In the reports section of this repository information about the individual expectations for the reports and how they should be housed is provided.
 
-### Documentation
+### [Documentation](/Documentation)
 
-The documentation folder contains:
+Contains:
 
-[Meeting Minutes](/Documentation/Meeting%20Minutes) : typed meeting minutes from team meetings which occured weekly at the minimum
+[**Meeting Minutes**](/Documentation/Meeting%20Minutes) : typed meeting minutes from team meetings which occured weekly at the minimum
 
-**Signoffs**: reports for each approved subsystem containing functionality, constraints, schematics, analysis, and BOM
+[**Signoffs**](/Documentation/Signoffs): reports for each approved subsystem containing functionality, constraints, schematics, analysis, and BOM
 
-### Software
+### [Software](./Software)
 
-All software utilized for the project can be found in the [Software](./Software) folder.
+All software utilized for the project can be found in the this folder.
