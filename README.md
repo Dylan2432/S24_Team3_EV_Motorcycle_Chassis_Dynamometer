@@ -33,7 +33,7 @@ Project images and videos will be added as the project progresses.
 
 **Dylan Scruggs**
 
-**Jonathan Haas**
+**Jonathan Haas** is a senoir majoring in Electrical Engineering and Business Management. Jonathan's interests are in critical power systems and power management. His role in this project is the design, implementation and testing of sensors for the dynamometer.
 
 **Branson Stephens**
 
