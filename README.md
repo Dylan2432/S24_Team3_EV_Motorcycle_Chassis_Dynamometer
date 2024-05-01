@@ -35,7 +35,7 @@ Project images and videos will be added as the project progresses.
 
 **Jonathan Haas** is a senior majoring in Electrical Engineering and Business Management. Jonathan's interests are in critical power systems and power management. His role in this project is the design, implementation, and testing of sensors for the dynamometer.
 
-**Branson Stephens**
+**Branson Stephens** is a senior Elecitrical Engineering major at Tennessee Tech. Branson's interests are in PLC programming and Telecommunications. His role in the project is the design and implementation of a variable power supply to support the braking system that is controlled from the user interface.
 
 ### Faculty Supervisor
 
@@ -58,6 +58,10 @@ We would like to thank Jesse Roberts for continually giving feedback and advice 
 ### [Reports](/Reports)
 
 In the reports section of this repository information about the individual expectations for the reports and how they should be housed is provided.
+
+The [**Project Proposal**](./Reports/Project%20Proposal/Project_Proposal_V2.pdf): Is the intial document that defines the problem and the goals of the project.
+
+The [**Conceptual Design**](./Reports/Conceptual%20Design/Conceptual%20Design%20and%20Planning.pdf): Gives a deeper breakdown of what the problem is, a breakdown of the subsystems of the project, and a projected timeline and budget of the project.  
 
 ### [Documentation](/Documentation)
 
