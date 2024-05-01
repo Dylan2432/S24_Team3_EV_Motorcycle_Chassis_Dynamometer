@@ -33,7 +33,7 @@ Project images and videos will be added as the project progresses.
 
 **Dylan Scruggs** is a senior Electrical Engineering major at Tennessee Tech. Dylan has interests in power systems and mechatronics. His role in this project is the design and implementation of the controlled braking system.
 
-**Jonathan Haas** is a senoir majoring in Electrical Engineering and Business Management. Jonathan's interests are in critical power systems and power management. His role in this project is the design, implementation, and testing of sensors for the dynamometer.
+**Jonathan Haas** is a senior majoring in Electrical Engineering and Business Management. Jonathan's interests are in critical power systems and power management. His role in this project is the design, implementation, and testing of sensors for the dynamometer.
 
 **Branson Stephens**
 
