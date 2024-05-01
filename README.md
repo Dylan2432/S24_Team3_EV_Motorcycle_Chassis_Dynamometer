@@ -29,7 +29,7 @@ Project images and videos will be added as the project progresses.
 
 **Andrew Copeland** is a senior Electrical Engineering major at Tennessee Tech. His interests include power systems, control systems, and mechatronics. Andrew's role in this project is the design and implementation of a user interface for the test system.
 
-**Aaron Littleton** 
+**Aaron Littleton** is a senior Electrical Engineering major at Tennessee Tech with a minor in Mathematics. Aaron's interests include power systems and power grid design.  His role in this project is the design and implementation of the data acquisition system.   
 
 **Dylan Scruggs** is a senior Electrical Engineering major at Tennessee Tech. Dylan has interests in power systems and mechatronics. His role in this project is the design and implementation of the controlled braking system.
 
