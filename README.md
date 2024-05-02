@@ -8,17 +8,17 @@ Proton Power is developing a cutting-edge battery to revolutionize electric moto
 
 ## Capabilities
 
-Here explain in more detail (though not as much as will be given in the datasheet) what the version of this project in this repo is capable of doing.
+This dynamometer is designed to test and measure the performance metrics of an electric motorcycle.
 
 
 ## Salient Outcomes
 
-Projects often have some outcomes that are more interesting than others. Here, highlight those things that you found interesting!
+To be updated as the project progresses
 
 
 ## Project Demonstration & Images
 
-Project images and videos will be added as the project progresses.
+Project demos and images will be uploaded as the project progresses.
 
 
 ## About Us
