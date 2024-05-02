@@ -8,7 +8,15 @@ Proton Power is developing a cutting-edge battery to revolutionize electric moto
 
 ## Capabilities
 
-This dynamometer is designed to test and measure the performance metrics of an electric motorcycle.
+This dynamometer is designed to test and measure the performance metrics of an electric motorcycle. It shall have the following capabilities:
+1. Fully remote-operable from PC 
+2. Plot bike speed and torque in real time on PC
+3. Data logging for later analysis
+4. Support bike speeds of 0-75km/hr
+5. Support incline testing for 0-8% road grade
+6. Adjust bike speed in 1km/hr increments
+8. Able to be disassembled for transport
+9. Emergency stop capable
 
 
 ## Salient Outcomes
