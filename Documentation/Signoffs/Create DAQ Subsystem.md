@@ -7,14 +7,14 @@ The primary function of the data acquisition (DAQ) is capturing and displaying r
 ## Constraints
 |No.        |Constraints   |Origin   |
 |---|---------------------|--------|
-|3|The DAQ must have at least 10 analog inputs, to cover all possible sensors being used from the sensor integration system.         |Design Constraint |
+|3|The DAQ must have at least 2 analog inputs, to cover all possible sensors being used from the sensor integration system.         |Design Constraint |
 |16|Analog input pins must be able to read an output of 0-5 V, 0-10 V, or 4-20mA input from the sensors.       |Derived from further considerations|
 |17|The DAQ must have an analog-to-digital converter with a minimum of 10-bit resolution.       |Derived from further considerations|
 |18|The DAQ must have a sampling rate of at least 4.8kS/s       |Derived from further considerations|
 |19|The DAQ must be able to read the RPM sensor in increments of 1 rpm, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in incremets of 0.1 N-m.      |Derived from further considerations|
 
 
-3.) To make sure all possible sensors are accounted for, it is vital to have a minimum of 10 analog inputs.
+3.) To make sure all possible sensors are accounted for, it is vital to have a minimum of 2 analog inputs.
 
 16.) An industry standard for sending a signal from a sensor to a data acquisition system or controller is a 4-20 mA current loop or 0-5v voltage.  Because of this, the daq selected must be able to read in either 4-20mA, 0-5v, or 0-10v sensors on an analog input pin.
 
@@ -42,7 +42,7 @@ Note: Due to the braking subsystem, the sensors are subject to change. However, 
 
 ### USB-6215:
 
-The design of this subsystem presents a National Instruments USB-6215 multifunction DAQ device and LabVIEW software to effectively power sensors, capture sensor outputs, calibrate raw sensor data, perform necessary conversions/calculations, and send data to the user interface system for display/logging.  The USB-6215 has 16 analog input pins which exceeds the minimum requirement of 10 pins.  This satisfies constraint 3.  The analog input pins allow for interfacing with analog sensors to capture test data.  It also has 8 digital I/O pins, 4 PWM output pins, and 1 5V pin.  The PWM and digital I/O pins allow for the addition of digital sensors or motors from other subsystems.  This system allows analog input of ±0-10 volts which widens the variety of available sensors, compared to only 0-5v. The system itself will be powered by the USB-B connection. The system communicates with a laptop/PC via the same USB-B connection, where it will send the measured data to the user-interface system. 
+The design of this subsystem presents a National Instruments USB-6215 multifunction DAQ device and LabVIEW software to effectively power sensors, capture sensor outputs, calibrate raw sensor data, perform necessary conversions/calculations, and send data to the user interface system for display/logging.  The USB-6215 has 16 analog input pins which exceeds the minimum requirement of 2 pins.  This satisfies constraint 3.  The analog input pins allow for interfacing with analog sensors to capture test data.  It also has 8 digital I/O pins, 4 PWM output pins, and 1 5V pin.  The PWM and digital I/O pins allow for the addition of digital sensors or motors from other subsystems.  This system allows analog input of ±0-10 volts which widens the variety of available sensors, compared to only 0-5v. The system itself will be powered by the USB-B connection. The system communicates with a laptop/PC via the same USB-B connection, where it will send the measured data to the user-interface system. 
 
   The system will operate with the LabVIEW software, making it easy to work with sensors, motors, and displays.  This is also where the raw sensor data will be converted to relevant metrics, to then be sent to the user interface for display.
 
