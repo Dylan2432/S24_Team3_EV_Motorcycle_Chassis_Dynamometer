@@ -8,15 +8,15 @@ The primary function of the data acquisition (DAQ) is capturing and displaying r
 |No.        |Constraints   |Origin   |
 |---|---------------------|--------|
 |3|The DAQ must have at least 2 analog inputs, to cover all possible sensors being used from the sensor integration system.         |Design Constraint |
-|16|Analog input pins must be able to read an output of 0-5 V, 0-10 V, or 4-20mA input from the sensors.       |Derived from further considerations|
+|16|Analog input pins must be able to read an output of 0-5 V or 0-10 V input from the sensors.       |Derived from further considerations|
 |17|The DAQ must have an analog-to-digital converter with a minimum of 10-bit resolution.       |Derived from further considerations|
 |18|The DAQ must have a sampling rate of at least 4.8kS/s       |Derived from further considerations|
-|19|The DAQ must be able to read the RPM sensor in increments of 1 rpm, voltage in increments of 0.5 V, current in increments of 0.1 A, and torque in incremets of 0.1 N-m.      |Derived from further considerations|
+|19|The DAQ must be able to read the RPM sensor in increments of 1 rpm and torque in incremets of 0.1 N-m.      |Derived from further considerations|
 
 
 3.) To make sure all possible sensors are accounted for, it is vital to have a minimum of 2 analog inputs.
 
-16.) An industry standard for sending a signal from a sensor to a data acquisition system or controller is a 4-20 mA current loop or 0-5v voltage.  Because of this, the daq selected must be able to read in either 4-20mA, 0-5v, or 0-10v sensors on an analog input pin.
+16.) An industry standard for sending a signal from a sensor to a data acquisition system or controller is a 4-20 mA current loop or 0-5v voltage.  Because of this, the daq selected must be able to read in either 0-5v or 0-10v sensors on an analog input pin.
 
 17.)  Using the resolution equation in the analysis, a 10-bit ADC would allow the team to meet the minimum specified resolution. 
 
@@ -69,15 +69,9 @@ We can verify the accuracy of the equation through an example. Say we have a DAQ
 
   Our E value was chosen as higher than the expected value to prepare for a worst-case scenario. A lower E value would lead to more precision.
 
-  For voltage, our E is 100 VDC, which allows our precision to be 0.001526 V. This means the logger will respond to voltage changes of 0.001526V or more. 1% of E is 1; therefore precision of 0.001526 meets and exceeds the limitations of constraint 19.
+  For RPM, our E is 1500 RPM, this is based on the max RPM of the drum being 1,288 RPM. This means the precision is 0.01137. 1% of E is 15; therefore precision of 0.007582 meets and exceeds the limitations of constraint 19.
 
-
-For current, our E is 50 A, which allows the precision to be 0.000763 A. 1% of E is 0.5; therefore precision of 0.000763 meets and exceeds the limitations of constraint 19.
-
-
-  For RPM, our E is 1000 RPM, this is based on the max rpm of the rear wheel being 700.69. This means the precision is 0.01526. 1% of E is 10; therefore precision of 0.01526 meets and exceeds the limitations of constraint 19.
-
-  For torque our E is 10 Nm, this is based on the max torque of the rear wheel being 4.995 Nm. This means the precision is 0.0001526 Nm. 1% of E is 0.1; therefore precision of 0.0001526 meets and exceeds the limitations of constraint 19.
+  For torque our E is 50 Nm, this is based on the max torque of the drive motor being 25.94 lb-ft, which translates to 35.17 Nm. This means the precision is 0.01388 Nm. 1% of E is 0.5; therefore precision of 0.01388 meets and exceeds the limitations of constraint 19.
 
   These values are more precise than other dynos on the market, which provides confidence in the ability of the USB-6215 to work as a DAQ.
 
