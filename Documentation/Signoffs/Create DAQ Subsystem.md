@@ -69,7 +69,7 @@ We can verify the accuracy of the equation through an example. Say we have a DAQ
 
   Our E value was chosen as higher than the expected value to prepare for a worst-case scenario. A lower E value would lead to more precision.
 
-  For RPM, our E is 1500 RPM, this is based on the max RPM of the drum being 1,288 RPM. This means the precision is 0.01137. 1% of E is 15; therefore precision of 0.007582 meets and exceeds the limitations of constraint 19.
+  For RPM, our E is 1500 RPM, this is based on the max RPM of the drum being 1,288 RPM. This means the precision is 0.01137. 1% of E is 15; therefore precision of 0.01137 meets and exceeds the limitations of constraint 19.
 
   For torque our E is 50 Nm, this is based on the max torque of the drive motor being 25.94 lb-ft, which translates to 35.17 Nm. This means the precision is 0.01388 Nm. 1% of E is 0.5; therefore precision of 0.01388 meets and exceeds the limitations of constraint 19.
 
