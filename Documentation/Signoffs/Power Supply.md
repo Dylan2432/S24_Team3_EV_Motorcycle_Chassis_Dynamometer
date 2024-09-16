@@ -24,8 +24,9 @@ Above: Basic Topology of Buck Converte
 ## Schematics ##
 ![image](https://github.com/user-attachments/assets/fbb07980-043c-487d-84ad-926ddbfc3433)
 Above: Kicad Schematic
-![image](https://github.com/user-attachments/assets/779a6d06-a4ff-489c-bd1f-c84db7be87e5)
-Above: Arduino Nano pinout
+
+![image](https://github.com/user-attachments/assets/a9cbadcb-280a-4191-81de-70f3ccde1b3e)
+Above: Arduino Nano pinout, PWM pins have the ~ symbol.
 ![image](https://github.com/user-attachments/assets/0bee9599-cdb0-42a9-aacf-5edecf995067)
 Above: Arduino Nano Screw Terminal board
 
