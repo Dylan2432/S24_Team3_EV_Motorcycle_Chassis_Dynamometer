@@ -18,7 +18,7 @@ Above: Basic Topology of Buck Converte
 1. This value is based off adding 150% of 125% of the FLA to 125% of the FLA of 5.9. There is risk of damanging the motor if this value is exceeded.
 2. It must be able change the voltage or current from the user interface. This will increase safety as the user is further away from high amperage of the buck converter.
 3. This is the max amount of current that will go through the inductor, diode, and MOSFET. This value wil be further disccussed in the analysis portion.
-4. One example that must be folowed is XXX ampacity chart to ensure proper wiring for the amount of current in the circuit
+4. One example that must be folowed is NEC 310-16 ampacity chart to ensure proper wiring for the amount of current in the circuit
 
 ## Schematics ##
 ![image](https://github.com/user-attachments/assets/fbb07980-043c-487d-84ad-926ddbfc3433)
@@ -80,20 +80,22 @@ If we do not want any current applied we can set the duty cycle to 0 as the MOSF
 
 
 ## BOM (Bill of Materials) ##
-| Item                                                          |  Quantity | Price | Total  | Link|
-|---------------------------------------------------------------|------------|----------|-------|--------|
-|TXN 100-148 Power Supply                                        |          2 |      $25.03 | $50.06| https://www.mouser.com/ProductDetail/TRACO-Power/TXN-100-148?qs=iLKYxzqNS776y9pVP5bizw%3D%3D |
-|Screw Terminal Block Breakout Module Board for Arduino Nano/Micro  |  1|$22.00 |$22.00| https://www.amazon.com/CZH-LABS-Terminal-Breakout-Module-Arduino/dp/B07QMRDZ3W/ref=sr_1_2_sspa?adgrpid=1334807691573188&dib=eyJ2IjoiMSJ9.8CC4qpKPSQ0agWcQH7KiQq6pslDK34qJiQN40Mm7Mt9xeWnIDN63F7FAjTm_uRgeJOiPqUhQgetgc96PCDZo5nokJVXyAEpfzPe44T2rKkC_LdjXKl-PIzdS3okbKXNPRvrlQkBKWBYvhTVaucQGVCqFrn8fMBAiXBuL7pP4CrDCvY-VmOW1RC3xI4PRuVeasVMyRDHn-aeBA8JpMKT3ORDavsckR7N-cufCDvAQyao.P1T0xlBhmBswXsf0Ti42289M2m9GUqygQsNGsZb-Uvg&dib_tag=se&hvadid=83425694871534&hvbmt=be&hvdev=c&hvlocphy=84181&hvnetw=o&hvqmt=e&hvtargid=kwd-83425850018739%3Aloc-190&hydadcr=18918_13351314&keywords=arduino+nano+screw+terminal&msclkid=98c75911be981aa72f9a3ff9c744c3d7&qid=1726511582&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1  |
-|Arduino Nano with USB cable                               |          1 |      $19.99 | $19.99| https://www.amazon.com/dp/B0D5LYFRQP/ref=sspa_dk_hqp_detail_aax_0?psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9ocXBfc2hhcmVk |
-|Inductor 74437529203330                                       |          2 |      $9.43 | $18.86|https://www.mouser.com/ProductDetail/Wurth-Elektronik/74437529203330?qs=sGAEpiMZZMv126LJFLh8y%2Ffsm5hBFUvHDaSzuMlV0Gc%3D | 
-|Output Capacitor MAL212029101E3                                     |          2 |      $5.41 | $10.82| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |  
-|Input Capacitor B41858C9227M                                   |          2 |      $1.90 | $3.80| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |
-|Schottky Diode RB218NS100TL                                 |          4 |      $2.09 | $4.18| https://www.mouser.com/ProductDetail/ROHM-Semiconductor/RB218NS100TL?qs=4v%252BiZTmLVHGSz1dy1RhSpg%3D%3D |
-|MOSFET SQJ872EP-T1_GE3                               |          2 |      $1.46 | $2.92| https://www.mouser.com/ProductDetail/Vishay-Siliconix/SQJ872EP-T1_GE3?qs=y6ZabgHbY%252ByhIql41nGYsQ%3D%3D |
-|30ft 14AWG wire                             |          1 |      $29.99 | $29.99| https://www.amazon.com/dp/B0C27C1RCX/ref=twister_B0CB468CZK?_encoding=UTF8&th=1 |
-| **Subsystem Total**                                            |            |          |       | $162.62|
+| Item                                                          | Manufacturer | Quantity | Price | Total  | Link|
+|---------------------------------------------------------------|------------|----------|-------|--------|----|
+|TXN 100-148 Power Supply                                        |    TRACO Power    |  2 |      $25.03 | $50.06| https://www.mouser.com/ProductDetail/TRACO-Power/TXN-100-148?qs=iLKYxzqNS776y9pVP5bizw%3D%3D |
+|Screw Terminal Block Breakout Module Board for Arduino Nano/Micro  | CZH-LABS | 1|$22.00 |$22.00| https://www.amazon.com/CZH-LABS-Terminal-Breakout-Module-Arduino/dp/B07QMRDZ3W/ref=sr_1_2_sspa?adgrpid=1334807691573188&dib=eyJ2IjoiMSJ9.8CC4qpKPSQ0agWcQH7KiQq6pslDK34qJiQN40Mm7Mt9xeWnIDN63F7FAjTm_uRgeJOiPqUhQgetgc96PCDZo5nokJVXyAEpfzPe44T2rKkC_LdjXKl-PIzdS3okbKXNPRvrlQkBKWBYvhTVaucQGVCqFrn8fMBAiXBuL7pP4CrDCvY-VmOW1RC3xI4PRuVeasVMyRDHn-aeBA8JpMKT3ORDavsckR7N-cufCDvAQyao.P1T0xlBhmBswXsf0Ti42289M2m9GUqygQsNGsZb-Uvg&dib_tag=se&hvadid=83425694871534&hvbmt=be&hvdev=c&hvlocphy=84181&hvnetw=o&hvqmt=e&hvtargid=kwd-83425850018739%3Aloc-190&hydadcr=18918_13351314&keywords=arduino+nano+screw+terminal&msclkid=98c75911be981aa72f9a3ff9c744c3d7&qid=1726511582&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1  |
+|Arduino Nano                              |    Arduino|    1 |      $25.10| $25.10| https://www.amazon.com/Arduino-A000005-ARDUINO-Nano/dp/B0097AU5OU/ref=sr_1_3?adgrpid=1337006704097302&dib=eyJ2IjoiMSJ9.gA_RBHQKlL9fqee7OwDWKxgWB1jyYqARwwE-oC7y63gBp15lCBXG0l32vuXa9OL8N2Wfh-eQoKuHM-GqguNax9mDWdLEw2tawAr8AvWxw5ovfnzf9MpV2PD6AYq57TXnwbE_r0vvkeAy3f9ZKeKr1h50ugjkAYwgMCrRXxThVtkRbqi6RGdml_f0gTqQe_uJWJGrwXnSLMTMrN3chFTdvfWbF_wqAF9mA1svqnQbA5A.-IHVaQe_UYRcJSZtBbODjokeBYOKvAlWvwO-XZgeOJ0&dib_tag=se&hvadid=83563305678200&hvbmt=be&hvdev=c&hvlocphy=84181&hvnetw=o&hvqmt=e&hvtargid=kwd-83563266643869%3Aloc-190&hydadcr=24663_13770022&keywords=arduino+nano&msclkid=abcba43110de16bd24c0c2d96fd282ae&qid=1726513005&sr=8-3|
+|Arduino Nano USB cable| --- |1 | 6.99| 6.99| https://www.amazon.com/DIYables-Mini-Cable-Arduino-Pieces/dp/B0C7BMS5FG/ref=sr_1_3?crid=2KLUXOMWJCHJS&dib=eyJ2IjoiMSJ9.7pcz7_86rIBdMd3JLAsX67MgwNngLcAxc8l5cFDf7CsBp15lCBXG0l32vuXa9OL8QpCq0MRgz4wqpefroCPajl97TRZWGRWEkL9zRS5eroP8DjLQW7D4M7KBMdROu9HjuxGORpw-lKk1dhXeDCftwrVsl5uV5QYtcf10GJTbmeeYCO5JdnR3SbHCskYez4U2XZCYv7w0H8grBuDyjyNQoaMM3cyM3kaM57TPhVHiSMM.Nww5t30L2Xs7vjrUQmt1Ym_K7IYDIf8is3X3ZiHK5SQ&dib_tag=se&keywords=arduino+nano+with+usb&qid=1726512991&sprefix=arduino+nano+with+usb%2Caps%2C117&sr=8-3|
+|Inductor 74437529203330                                       |  Wurth Elektronik |       2 |      $9.43 | $18.86|https://www.mouser.com/ProductDetail/Wurth-Elektronik/74437529203330?qs=sGAEpiMZZMv126LJFLh8y%2Ffsm5hBFUvHDaSzuMlV0Gc%3D | 
+|Output Capacitor MAL212029101E3                                     |   EPCOS / TDK |       2 |      $5.41 | $10.82| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |  
+|Input Capacitor B41858C9227M                                   | EPCOS / TDK        | 2 |      $1.90 | $3.80| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |
+|Schottky Diode RB218NS100TL                                 |   ROHM Semiconductor   |    4 |      $2.09 | $4.18| https://www.mouser.com/ProductDetail/ROHM-Semiconductor/RB218NS100TL?qs=4v%252BiZTmLVHGSz1dy1RhSpg%3D%3D|
+|MOSFET SQJ872EP-T1_GE3                               |   Vishay / Siliconix |      2 |      $1.46 | $2.92| https://www.mouser.com/ProductDetail/Vishay-Siliconix/SQJ872EP-T1_GE3?qs=y6ZabgHbY%252ByhIql41nGYsQ%3D%3D |
+|30ft 14AWG wire                             |    NAOEVO   |    1 |      $29.99 | $29.99| https://www.amazon.com/dp/B0C27C1RCX/ref=twister_B0CB468CZK?_encoding=UTF8&th=1 |
+| **Subsystem Total**                                            |            |          |       | $165.29|
 
 ## References ##
 [1]https://www.ti.com/lit/an/slva477b/slva477b.pdf?ts=1726447009531&ref_url=https%253A%252F%252Fwww.google.com%252F
 [2]https://www.ti.com/lit/an/slyt670/slyt670.pdf
 https://www.mouser.com/pdfdocs/buckconverterdesignnote.pdf
+https://docs.arduino.cc/hardware/nano/
