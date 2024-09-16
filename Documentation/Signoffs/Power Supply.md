@@ -4,6 +4,7 @@ This subsystem is to supply the current to the motor’s used in the braking sub
 The basic operation of a buck converter is when the switch is closed the inductor is charged and no current flows through the diode. Then the switch is opened and the inductor acts as the source and goes through a loop through the diode until the switch is closed again.
 
 ![image](https://github.com/user-attachments/assets/0b3d8e39-7646-40e5-ba88-f462739e8e50)
+
 Above: Basic Topology of Buck Converte
 
 
@@ -89,10 +90,10 @@ If we do not want any current applied we can set the duty cycle to 0 as the MOSF
 |Inductor 74437529203330                                       |  Wurth Elektronik |       2 |      $9.43 | $18.86|https://www.mouser.com/ProductDetail/Wurth-Elektronik/74437529203330?qs=sGAEpiMZZMv126LJFLh8y%2Ffsm5hBFUvHDaSzuMlV0Gc%3D | 
 |Output Capacitor MAL212029101E3                                     |   EPCOS / TDK |       2 |      $5.41 | $10.82| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |  
 |Input Capacitor B41858C9227M                                   | EPCOS / TDK        | 2 |      $1.90 | $3.80| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |
-|Schottky Diode RB218NS100TL                                 |   ROHM Semiconductor   |    4 |      $2.09 | $4.18| https://www.mouser.com/ProductDetail/ROHM-Semiconductor/RB218NS100TL?qs=4v%252BiZTmLVHGSz1dy1RhSpg%3D%3D|
+|Schottky Diode RB218NS100TL                                 |   ROHM Semiconductor   |    4 |      $2.09 | $8.36| https://www.mouser.com/ProductDetail/ROHM-Semiconductor/RB218NS100TL?qs=4v%252BiZTmLVHGSz1dy1RhSpg%3D%3D|
 |MOSFET SQJ872EP-T1_GE3                               |   Vishay / Siliconix |      2 |      $1.46 | $2.92| https://www.mouser.com/ProductDetail/Vishay-Siliconix/SQJ872EP-T1_GE3?qs=y6ZabgHbY%252ByhIql41nGYsQ%3D%3D |
 |30ft 14AWG wire                             |    NAOEVO   |    1 |      $29.99 | $29.99| https://www.amazon.com/dp/B0C27C1RCX/ref=twister_B0CB468CZK?_encoding=UTF8&th=1 |
-| **Subsystem Total**                                            |            |          |       | $165.29|
+| **Subsystem Total**                                            |            |          |       | $178.90|
 
 ## References ##
 [1]https://www.ti.com/lit/an/slva477b/slva477b.pdf?ts=1726447009531&ref_url=https%253A%252F%252Fwww.google.com%252F
