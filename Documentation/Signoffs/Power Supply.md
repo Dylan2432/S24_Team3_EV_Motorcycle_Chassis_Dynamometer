@@ -1,54 +1,99 @@
 ## Functionality ##
-A 30 volt 20 amp variable power supply that is controlled from the user interface. It will be used to support the braking subsystem as to supply the
-DC current for the DC injection braking into the AC motor.
+This subsystem is to supply the current to the motor’s used in the braking subsystem. The user will be able to change the amount of current that is entered into the motor winding away the system. It will have a power supply going into a buck converter and the current will change depending on the duty cycle of the MOSFET which is used as a switch. The MOSFET will be switched on and off from PWM of an Arduino Nano with a frequency of 62.5 kHz and a PWM resolution of 8 bits which gives us 256 levels. This allows us to adjust the duty cycle in 0.391% increments. The user will set the duty cycle, this will cause the current to increase as the duty cycle decreases and to decrease as the duty cycle increases.
+
+The basic operation of a buck converter is when the switch is closed the inductor is charged and no current flows through the diode. Then the switch is opened and the inductor acts as the source and goes through a loop through the diode until the switch is closed again.
+
+![image](https://github.com/user-attachments/assets/0b3d8e39-7646-40e5-ba88-f462739e8e50)
+Above: Basic Topology of Buck Converte
+
 
 ## Constraints ##
 | No. | Constraints                                                                                     | Origin           |
 |-----|-------------------------------------------------------------------------------------------------|------------------|
-| 1   | Be able to supply at least 14.75 amps   | Design Constraint |
-| 2   | Must not exceed 18.4375 amps       | Design Constraint |
-| 3   | Must be controlled from the user interface           | Design Constraint |
+| 1   | Must not exceed 18.4375 amps       | Design Constraint |
+| 2   | Must be controlled from the user interface       | Design Constraint |
+| 3   | Inductors, diodes, and MOSFETs must be able to withstand a current of 16.867A | Derived from further considerations|
+| 4   | Comply with all relevant codes and standards listed in II. Ethical, Professional, and Standard Considerations. | Safey Constraint|
 
-1. This value is based off adding 150% of the FLA to the FLA of 5.9. This is further discussed in the braking subsystem
-2. This value is based off adding 150% of 125% of the FLA to 125% of the FLA of 5.9. There is risk of damanging the motor if this value is exceeded.
-3. It must be able change the voltage or current from the user interface and not from knobs on a power supply.
+1. This value is based off adding 150% of 125% of the FLA to 125% of the FLA of 5.9. There is risk of damanging the motor if this value is exceeded.
+2. It must be able change the voltage or current from the user interface. This will increase safety as the user is further away from high amperage of the buck converter.
+3. This is the max amount of current that will go through the inductor, diode, and MOSFET. This value wil be further disccussed in the analysis portion.
+4. One example that must be folowed is XXX ampacity chart to ensure proper wiring for the amount of current in the circuit
 
 ## Schematics ##
-The design will take three  12V 20A DC power supplies and wire them in series so that it is now an equivalent 36V 20A power supply.
-This will be the input to the circuit below that uses four LM338 voltage regulators. The circuit is based off a circuit in the datasheet of the LM338.
-The LM338 has an output range of 1.2 to 32V.
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158186278/bc1c88c0-9af4-40bf-8b69-e65cb53b07f7)
-The variable resistor at the bottom changes the voltage output of the circuit and the variable resistor at the output will change the current.
-
-The following circuit uses BJT transistors as switches that are controlled from the user interface that determine if the current will be sent to the winding
-of the AC motro to cause braking.
-![image](https://github.com/Dylan2432/Capstone1_Team3_EV-Motorcycle-Chassis-Dynamometer/assets/158186278/4f92f643-927f-49b5-8501-40dfd839ff78)
-The output of the previous circuit is going into the emitter of a 2N4398 PNP transistor, a resistor is added to the base to protect the BJT. A 2SD1484KT146R BJT collector is connected
-to the base of the 2N4398. The base of the 2SD1484KT146R is connected to a resistor and to an output on the DAQ. The DAQ will be able to determine whether the transistors are in saturation or in cutoff. 
+![image](https://github.com/user-attachments/assets/fbb07980-043c-487d-84ad-926ddbfc3433)
+Above: Kicad Schematic
+![image](https://github.com/user-attachments/assets/779a6d06-a4ff-489c-bd1f-c84db7be87e5)
+Above: Arduino Nano pinout
+![image](https://github.com/user-attachments/assets/0bee9599-cdb0-42a9-aacf-5edecf995067)
+Above: Arduino Nano Screw Terminal board
 
 ## Analysis ##
-The LM338 has a max output current of 5A, these can simply be put in parralel and as the input current is 20A and 4 LM338's are being used they are now able to be
-used. They are also able to handle 12 amps of current for short periods to time.
+The equations used to determine componet sizes are from Texas instruments.[1]
+We have a 48V, 2.2A source which we want to convert to a 14.667A output to enter in the motor winding. The duty cycle to acclompish this can be found from the following equation.
 
-The first transistor in the switching circuit must be able to handle at least 20 Amps. The selected 2N4398 has a max current of 30V more than 50% of
-the maxiumum current it will detect.
-The base current of the 2N4398 is found from the max current going through the tranistor of 20A divided by the minimum HCE of 40. This gives a
-value of 500mA. From here the resistor value is found from 36-0.7-4/0.500 = 62.6 so we will use a 75 ohm 1 watt resistor here. The next transistor used is
-2SD1484KT146R for it's high HFE of 180. We will need the base collector to be greater than 500/180 = 2.77 mA. The DAQ will be also able to supply a value greater
-than this which is needed. The resistor to connect to the base can be calculated by 3.84-0.7/2.77mA = 1133.57 ohms and we will use an 1000 ohm 1/4 watt resistor to gurantee saturation.
+![image](https://github.com/user-attachments/assets/3f942d3a-56f7-4a8a-b1da-2f5377b715fa)
+
+Where we will assume our efficieny, n, is 0.9 which Texas Instruments says is not unrealistic for a worst-case efficiency.
+If Vout is 7.2V, Vin is 48V, and efficiency is 0.9 we have duty cycle of 16.667%. From conservation of energy Pin = Pout and since the input power is known and output voltage is known we can calcutlate the output current is 14.667A. This value will not be the same in reality due to losses but it will be close to accurate.
+
+Then we will calculate the miniumum inductor value from the following equation.
+
+![image](https://github.com/user-attachments/assets/6e7dd296-8e95-4f80-9bec-443e3aed6dd6)
+
+The delta I_L, which is the inductor ripple current, can be estimated to 30% of the output current and using a frequency of 62.5kHz we arrive at a minimum inductance value of 22.25 microhenry. We used a 33 microhenry inductor which is above the minimum value calculated.
+
+To determine the maximum current that will flow through our inductor, diode, and MOSFET we will use the following equation.
+
+![image](https://github.com/user-attachments/assets/0e9f3d6f-bbc1-45b6-9098-384231be1b52)
+
+This gives us a value of 16.867A and the componets must be sized to handle this current and the componets chosen will be atleast 10% above this value.
+
+To determine minimum output capacitor size the following equation is used.
+
+![image](https://github.com/user-attachments/assets/18530d12-b568-4f79-8055-58f700e772a3)
+
+Allowing for the voltage ripple to be 100mV the minimum capacitor size is 88 microfarad. As the output capacitor size increases the amount of voltage ripple will decrease.
+
+To determine the minimum input capacitor size the following equation is used. [2]
+
+![image](https://github.com/user-attachments/assets/ac1dcf1c-0487-4b38-8588-cf4adbfbc5b9)
+
+Having the input votlage ripple to be 100mV we have minimum input capacitor size of 135.8 microfarad.
+
+To assist with power dissipation in the diodes two Schtokky diodes in paralle were used. The forward voltage is 0.84 which causes the power dissipation to be (16.871/2)*(0.84) = 7.09W.
+
+The arduino nano was chosen as it allows for 5V, 8 bit PWM on each PWM pin. Since the clock is 16Mhz, an 8 bit PWM resolution allows for a frequency of 62.5kHz. The 8 bit PWM allows for a duty cycle resolution 0.4% which will allow for greater control.
+
+To simulate the circuit LTSPICE was used.
+![image](https://github.com/user-attachments/assets/4c7abf01-b275-4a39-b53e-95024253f314)
+
+At 50% duty cycle, the expected current value would be 4.4A. The measured value in LTSPICE was 4.38A
+![image](https://github.com/user-attachments/assets/708589d6-56dd-4017-99c4-d0bf7ba198e3)
+At 75% duty cycle the expected current value would be 2.93A. The measure value was 2.94A.
+![image](https://github.com/user-attachments/assets/e075e0fe-74e8-48ae-b4bb-c3708dbc0fac)
+The current values were within 5% of error from a duty cycle of 15% to a duty cycle of 95%. Which allows for a current range of 2.32A - 14.34A.
+If we do not want any current applied we can set the duty cycle to 0 as the MOSFET acting as a switch will never close. 
+
+
+
+
+
 ## BOM (Bill of Materials) ##
-| Item                                                          |  Quantity | Price | Total  |
+| Item                                                          |  Quantity | Price | Total  | Link|
 |---------------------------------------------------------------|------------|----------|-------|--------|
-|  ALITOVE DC 12V 20A 240W Power Supply  | 3        | $22.99| $68.97 |
-|       2N4398 BJT PNP Transistor  | 1        | $4.52 | $4.52  |
-|  LM338T/NOPB Voltage Regulator| 4 | $2.34| $9.36 |
-| 2SD1484KT146R BJT Transistor |  1 | $0.40 | 0.40 |
-|	     75 Ohm 1 Watt Resistor  | 100  | $0.0745 |	$7.45 |
-|	     1000 Ohm 1/4 Watt Resistor  | 10  | $0.55 |	$5.46 |
-|2N2905 PNP BJT Transistor|10 | $0.199 | 1.99 |
-|Multilayer Ceramic Capacitors MLCC - SMD/SMT 100V 200pF C0G 0805 2%| 1 | $1.99 | 1.99 |
-|BK-AHCF-18-R 18 amp fuse| 5 | $6.30 | 31.50 |
-| **Subsystem Total**                                            |            |          |       | $67.95 |
+|TXN 100-148 Power Supply                                        |          2 |      $25.03 | $50.06| https://www.mouser.com/ProductDetail/TRACO-Power/TXN-100-148?qs=iLKYxzqNS776y9pVP5bizw%3D%3D |
+|Screw Terminal Block Breakout Module Board for Arduino Nano/Micro  |  1|$22.00 |$22.00| https://www.amazon.com/CZH-LABS-Terminal-Breakout-Module-Arduino/dp/B07QMRDZ3W/ref=sr_1_2_sspa?adgrpid=1334807691573188&dib=eyJ2IjoiMSJ9.8CC4qpKPSQ0agWcQH7KiQq6pslDK34qJiQN40Mm7Mt9xeWnIDN63F7FAjTm_uRgeJOiPqUhQgetgc96PCDZo5nokJVXyAEpfzPe44T2rKkC_LdjXKl-PIzdS3okbKXNPRvrlQkBKWBYvhTVaucQGVCqFrn8fMBAiXBuL7pP4CrDCvY-VmOW1RC3xI4PRuVeasVMyRDHn-aeBA8JpMKT3ORDavsckR7N-cufCDvAQyao.P1T0xlBhmBswXsf0Ti42289M2m9GUqygQsNGsZb-Uvg&dib_tag=se&hvadid=83425694871534&hvbmt=be&hvdev=c&hvlocphy=84181&hvnetw=o&hvqmt=e&hvtargid=kwd-83425850018739%3Aloc-190&hydadcr=18918_13351314&keywords=arduino+nano+screw+terminal&msclkid=98c75911be981aa72f9a3ff9c744c3d7&qid=1726511582&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1  |
+|Arduino Nano with USB cable                               |          1 |      $19.99 | $19.99| https://www.amazon.com/dp/B0D5LYFRQP/ref=sspa_dk_hqp_detail_aax_0?psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9ocXBfc2hhcmVk |
+|Inductor 74437529203330                                       |          2 |      $9.43 | $18.86|https://www.mouser.com/ProductDetail/Wurth-Elektronik/74437529203330?qs=sGAEpiMZZMv126LJFLh8y%2Ffsm5hBFUvHDaSzuMlV0Gc%3D | 
+|Output Capacitor MAL212029101E3                                     |          2 |      $5.41 | $10.82| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |  
+|Input Capacitor B41858C9227M                                   |          2 |      $1.90 | $3.80| https://www.mouser.com/ProductDetail/EPCOS-TDK/B41858C9227M?qs=sGAEpiMZZMsh%252B1woXyUXj1SPYG7TfWbY3M%252BRTBa2uXQ%3D |
+|Schottky Diode RB218NS100TL                                 |          4 |      $2.09 | $4.18| https://www.mouser.com/ProductDetail/ROHM-Semiconductor/RB218NS100TL?qs=4v%252BiZTmLVHGSz1dy1RhSpg%3D%3D |
+|MOSFET SQJ872EP-T1_GE3                               |          2 |      $1.46 | $2.92| https://www.mouser.com/ProductDetail/Vishay-Siliconix/SQJ872EP-T1_GE3?qs=y6ZabgHbY%252ByhIql41nGYsQ%3D%3D |
+|30ft 14AWG wire                             |          1 |      $29.99 | $29.99| https://www.amazon.com/dp/B0C27C1RCX/ref=twister_B0CB468CZK?_encoding=UTF8&th=1 |
+| **Subsystem Total**                                            |            |          |       | $162.62|
 
 ## References ##
-LM338 datasheet: https://www.ti.com/lit/ds/symlink/lm338.pdf
+[1]https://www.ti.com/lit/an/slva477b/slva477b.pdf?ts=1726447009531&ref_url=https%253A%252F%252Fwww.google.com%252F
+[2]https://www.ti.com/lit/an/slyt670/slyt670.pdf
+https://www.mouser.com/pdfdocs/buckconverterdesignnote.pdf
