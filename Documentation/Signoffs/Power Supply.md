@@ -1,22 +1,15 @@
 ## Functionality ##
-This subsystem is to supply the current to the motor’s used in the braking subsystem. The user will be able to change the amount of current that is entered into the motor winding away the system. It will have a power supply going into a buck converter and the current will change depending on the duty cycle of the MOSFET which is used as a switch. The MOSFET will be switched on and off from PWM of an Arduino Nano with a frequency of 62.5 kHz and a PWM resolution of 8 bits which gives us 256 levels. This allows us to adjust the duty cycle in 0.391% increments. The user will set the duty cycle, this will cause the current to increase as the duty cycle decreases and to decrease as the duty cycle increases.
-
-The basic operation of a buck converter is when the switch is closed the inductor is charged and no current flows through the diode. Then the switch is opened and the inductor acts as the source and goes through a loop through the diode until the switch is closed again.
-
-![image](https://github.com/user-attachments/assets/0b3d8e39-7646-40e5-ba88-f462739e8e50)
-
-Above: Basic Topology of Buck Converte
-
+This subsystem is to supply the current to the motor windings for DC injection braking used in the braking subsystem. The user will be able to change the amount of current that is entered into the motor winding. It will have a power supply going into a buck converter and the current will change depending on the duty cycle of the MOSFET which is used as a switch. The user will set the duty cycle, this will cause the current to increase as the duty cycle decreases and to decrease as the duty cycle increases.
 
 ## Constraints ##
 | No. | Constraints                                                                                     | Origin           |
 |-----|-------------------------------------------------------------------------------------------------|------------------|
-| 1   | Must not exceed 18.4375 amps       | Design Constraint |
+| 1   | Current entering the motor winding must not exceed 18.4375 amps       | Design Constraint |
 | 2   | Must be controlled from the user interface       | Design Constraint |
 | 3   | Inductors, diodes, and MOSFETs must be able to withstand a current of 16.867A | Derived from further considerations|
 | 4   | Comply with all relevant codes and standards listed in II. Ethical, Professional, and Standard Considerations. | Safey Constraint|
 
-1. This value is based off adding 150% of 125% of the FLA to 125% of the FLA of 5.9. There is risk of damanging the motor if this value is exceeded.
+1. This value is based off adding 150% of 125% of the FLA of the motor of 5.9. There is risk of damanging the motor if this value is exceeded.
 2. It must be able change the voltage or current from the user interface. This will increase safety as the user is further away from high amperage of the buck converter.
 3. This is the max amount of current that will go through the inductor, diode, and MOSFET. This value wil be further disccussed in the analysis portion.
 4. One example that must be folowed is NEC 310-16 ampacity chart to ensure proper wiring for the amount of current in the circuit
@@ -31,6 +24,12 @@ Above: Arduino Nano pinout, PWM pins have the ~ symbol.
 Above: Arduino Nano Screw Terminal board
 
 ## Analysis ##
+The basic operation of a buck converter is when the switch is closed the inductor is charged and no current flows through the diode. Then the switch is opened and the inductor acts as the source and goes through a loop through the diode until the switch is closed again.
+
+![image](https://github.com/user-attachments/assets/0b3d8e39-7646-40e5-ba88-f462739e8e50)
+
+Above: Basic Topology of Buck Converte
+
 The equations used to determine componet sizes are from Texas instruments.[1]
 We have a 48V, 2.2A source which we want to convert to a 14.667A output to enter in the motor winding. The duty cycle to acclompish this can be found from the following equation.
 
@@ -63,7 +62,7 @@ To determine the minimum input capacitor size the following equation is used. [2
 
 Having the input votlage ripple to be 100mV we have minimum input capacitor size of 135.8 microfarad.
 
-To assist with power dissipation in the diodes two Schtokky diodes in paralle were used. The forward voltage is 0.84 which causes the power dissipation to be (16.871/2)*(0.84) = 7.09W.
+To assist with power dissipation in the diodes two Schtokky diodes in paralle were used. The forward voltage is 0.87 which causes the power dissipation to be (16.871/2)*(0.87) = 7.34W.
 
 The arduino nano was chosen as it allows for 5V, 8 bit PWM on each PWM pin. Since the clock is 16Mhz, an 8 bit PWM resolution allows for a frequency of 62.5kHz. The 8 bit PWM allows for a duty cycle resolution 0.4% which will allow for greater control.
 
@@ -75,7 +74,38 @@ At 50% duty cycle, the expected current value would be 4.4A. The measured value 
 At 75% duty cycle the expected current value would be 2.93A. The measure value was 2.94A.
 ![image](https://github.com/user-attachments/assets/e075e0fe-74e8-48ae-b4bb-c3708dbc0fac)
 The current values were within 5% of error from a duty cycle of 15% to a duty cycle of 95%. Which allows for a current range of 2.32A - 14.34A.
-If we do not want any current applied we can set the duty cycle to 0 as the MOSFET acting as a switch will never close. 
+If we do not want any current applied we can set the duty cycle to 0 as the MOSFET acting as a switch will never close.
+
+### Arduino and User Interface ###
+The MOSFET will be switched on and off from PWM of an Arduino Nano with a frequency of 62.5 kHz and a PWM resolution of 8 bits which gives us 256 levels. This allows us to adjust the duty cycle in 0.391% increments.
+
+The user will enter their desired output current at the user interface. This will correlate to a analog voltage output going to the Arduino Nano as an analog input, that input will then set the duty cycle that is outputed to the MOSFET.
+
+The PWM resolution is 8 bits while the pins have 10 bits of resolution when using analogRead() on pins A0-A7.
+
+### PCB Layout and Thermal Considerations ###
+Below is some general points for PCB layouts for a Buck Converter from ROHM semiconductor [3]
+
+![image](https://github.com/user-attachments/assets/ac3eb086-f394-4a3e-aebf-cf6d41280ddb)
+
+Below is a general layout from the same application note that would be followed. It would not be the exact same as the componets are not equivalent but it will follow the same layout.
+
+![image](https://github.com/user-attachments/assets/f7f6e438-a750-4a56-89c2-dfca0c774ad3)
+
+Where IC is the MOSFET to be used. The yellow dots are thermal vias to help with heat dissipation where ROHM recommends the innder diamter to be 0.3mm and the space between them to be 1.2mm. We will add aditional thermal vias by the parallel diodes to assit with the heat.
+
+Altium has a current table to PCB trace width table that says what trace width will limit your temperature rise to 10 °C with 1 oz./sq. ft. copper weight.[4] For the diodes the max amount of current going through one of them would be 8.4335A so a trace width of 260 mils(0.26 inches) or higher would be chosen. 
+
+
+Below is PCB thermal layout tips for DC/DC converters from texas instruments.
+
+![image](https://github.com/user-attachments/assets/decc18a0-aae9-4269-8bb2-913b2f3d48db)
+
+We will not have a package with DAP. What Texas instruments means by the "pizza" concept is the fact that the heat will go out radially and you want to avoid cuts closer to the device. They provide an image of two layouts and the heat flow between the two to show this concept.
+
+![image](https://github.com/user-attachments/assets/d45433dc-81eb-408f-9b54-76c7e0e26e6a)
+
+We will also place the higher current componets such as the inductor, MOSFET, and diode closer towards the center so there is more area for the heat to spread out radially. However they cannot be too close as too avoid the heat adding together to create a much greater temperature rise.
 
 
 
@@ -99,5 +129,10 @@ If we do not want any current applied we can set the duty cycle to 0 as the MOSF
 ## References ##
 [1]https://www.ti.com/lit/an/slva477b/slva477b.pdf?ts=1726447009531&ref_url=https%253A%252F%252Fwww.google.com%252F
 [2]https://www.ti.com/lit/an/slyt670/slyt670.pdf
+[3]https://fscdn.rohm.com/en/products/databook/applinote/ic/power/switching_regulator/converter_pcb_layout_appli-e.pdf
+[4]https://resources.altium.com/p/pcb-trace-width-vs-current-table-high-voltage-design
 https://www.mouser.com/pdfdocs/buckconverterdesignnote.pdf
-https://docs.arduino.cc/hardware/nano/
+https://docs.arduino.cc/hardware/nano
+https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/
+https://www.ti.com/lit/ds/symlink/tps40200.pdf
+
