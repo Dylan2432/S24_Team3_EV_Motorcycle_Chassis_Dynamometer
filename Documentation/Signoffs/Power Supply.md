@@ -88,14 +88,10 @@ Below is some general points for PCB layouts for a Buck Converter from ROHM semi
 
 ![image](https://github.com/user-attachments/assets/ac3eb086-f394-4a3e-aebf-cf6d41280ddb)
 
-Below is a general layout from the same application note that would be followed. It would not be the exact same as the componets are not equivalent but it will follow the same layout.
+![image](https://github.com/user-attachments/assets/83d3c8ae-9a5c-4723-a862-5a593f63c849)
+Above: PCB layout for buck converter
 
-![image](https://github.com/user-attachments/assets/f7f6e438-a750-4a56-89c2-dfca0c774ad3)
-
-Where IC is the MOSFET to be used. The yellow dots are thermal vias to help with heat dissipation where ROHM recommends the innder diamter to be 0.3mm and the space between them to be 1.2mm. We will add aditional thermal vias by the parallel diodes to assit with the heat.
-
-Altium has a current table to PCB trace width table that says what trace width will limit your temperature rise to 10 °C with 1 oz./sq. ft. copper weight.[4] For the diodes the max amount of current going through one of them would be 8.4335A so a trace width of 260 mils(0.26 inches) or higher would be chosen. 
-
+Altium has a current table to PCB trace width table that says what trace width will limit your temperature rise to 10 °C with 1 oz./sq. ft. copper weight.[4] For the diodes the max amount of current going through one of them would be 8.4335A so a trace width of 260 mils(0.26 inches) or higher would be chosen. Near the indcutor and diodes where there is a larger current and more power dissipation there is larger traces to assit with this problem. We also have thermal vias near diode, inductor, and the MOSFET to help with heat issues.
 
 Below is PCB thermal layout tips for DC/DC converters from texas instruments.
 
